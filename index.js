@@ -1,9 +1,6 @@
-const visit = require("unist-util-visit")
+import { visit } from "unist-util-visit"
 
-module.exports = attacher
-attacher.withInlineCodeLanguage = withInlineCodeLanguage
-
-function attacher(separator) {
+export default function attacher(separator) {
 	if (!separator) return
 
 	return transformer
@@ -15,7 +12,7 @@ function attacher(separator) {
 	}
 }
 
-function withInlineCodeLanguage(node, separator) {
+export function withInlineCodeLanguage(node, separator) {
 	const [language, code] = node.value.split(separator, 2)
 	if (language && code) {
 		node.value = code

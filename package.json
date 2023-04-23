@@ -5,6 +5,7 @@
   "repository": "https://github.com/stefanprobst/remark-inline-code-language.git",
   "author": "Stefan Probst <stefanprobst@kolabnow.com>",
   "license": "MIT",
+  "type": "module",
   "keywords": [
     "remark",
     "remark-plugin"
