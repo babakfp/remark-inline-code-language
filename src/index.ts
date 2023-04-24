@@ -4,24 +4,19 @@ const SEPARATOR_POSITION = {
 	BEFORE: "before",
 	AFTER: "after",
 	BOTH: "both",
+} as const
+
+interface Options {
+	separator_position: (typeof SEPARATOR_POSITION)[keyof typeof SEPARATOR_POSITION]
+	separator_character: string
 }
 
-/**
- * @typedef Options
- * @prop {...SEPARATOR_POSITION} separator_position
- * @prop {string} separator_character
- */
-
-/** @type {Options} */
-const default_options = {
+const default_options: Options = {
 	separator_position: SEPARATOR_POSITION.BEFORE,
 	separator_character: "_",
 }
 
-/**
- * @param {Options} options
- */
-export default function attacher(options = default_options) {
+export default function attacher(options: Options = default_options) {
 	return function transformer(tree) {
 		visit(tree, "inlineCode", function visitor(node) {
 			within_inline_code_language(node, options)

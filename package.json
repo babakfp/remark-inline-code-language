@@ -1,17 +1,21 @@
 {
 	"name": "remark-inline-code-language",
 	"version": "1.0.0",
-	"main": "index.js",
+	"main": "./dist/index.js",
 	"repository": "https://github.com/stefanprobst/remark-inline-code-language.git",
 	"author": "Stefan Probst <stefanprobst@kolabnow.com>",
 	"license": "MIT",
 	"type": "module",
+	"scripts": {
+		"dev": "tsc -w",
+		"build": "tsc"
+	},
 	"keywords": [
 		"remark",
 		"remark-plugin"
 	],
 	"files": [
-		"index.js"
+		"./dist"
 	],
 	"dependencies": {
 		"unist-util-visit": "4.1.2"
