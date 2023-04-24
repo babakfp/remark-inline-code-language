@@ -3,9 +3,7 @@ import { visit } from "unist-util-visit"
 export default function attacher(separator) {
 	if (!separator) return
 
-	return transformer
-
-	function transformer(tree) {
+	return function transformer(tree) {
 		visit(tree, "inlineCode", function visitor(node) {
 			withInlineCodeLanguage(node, separator)
 		})
