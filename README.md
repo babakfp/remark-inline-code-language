@@ -41,7 +41,7 @@ console.log(JSON.stringify(result.children[0].children[0], null, 4))
 }
 ```
 
-### Options
+## Options
 
 You can customize the syntax!
 
@@ -53,23 +53,25 @@ If you are going to only change 1 option, sadly you need to add in all other opt
 })
 ```
 
-#### `separator_character`
+### `separator_character`
 
 This is the character(s) that separates the language name from the code content itself.
 
 - Type: `string`
 - Default: `"_"`
 
-##### Examples
+#### Examples
 
 - `"_"` => `_js console.log()`
 - `"+"` => `+js console.log()`
 - `"="` => `=js console.log()`
 
-#### `separator_position`
+### `separator_position`
 
 - Type: `"before" | "after" | "both"`
 - Default: `"before"`
+
+#### Examples
 
 - `"before"` => `_js console.log()`
 - `"after"` => `js_ console.log()`
