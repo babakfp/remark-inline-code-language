@@ -1,0 +1,13 @@
+{
+	"editor.formatOnSave": true,
+	"files.exclude": {
+		"**/package-lock.json": true,
+		"**/yarn.lock": true,
+		"**/pnpm-lock.yaml": true
+	},
+	"search.exclude": {
+		"**/package-lock.json": true,
+		"**/yarn.lock": true,
+		"**/pnpm-lock.yaml": true
+	}
+}
