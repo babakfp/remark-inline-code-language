@@ -11,20 +11,27 @@ interface Options {
 	separator_character: string
 }
 
+interface Inline_Code {
+	type: "inlineCode"
+	value: string
+	lang?: string
+	[key: string]: any
+}
+
 const default_options: Options = {
 	separator_position: SEPARATOR_POSITION.BEFORE,
 	separator_character: "_",
 }
 
 export default function attacher(options: Options = default_options) {
-	return function transformer(tree) {
+	return function transformer(tree: any) {
 		visit(tree, "inlineCode", function visitor(node) {
 			transform_node(node, options)
 		})
 	}
 }
 
-function transform_node(node, options: Options) {
+function transform_node(node: Inline_Code, options: Options) {
 	const values = get_transformed_values(node, options)
 
 	if (values) {
@@ -35,7 +42,7 @@ function transform_node(node, options: Options) {
 	return node
 }
 
-function get_transformed_values(node, options: Options) {
+function get_transformed_values(node: Inline_Code, options: Options) {
 	let match
 
 	if (options.separator_position === SEPARATOR_POSITION.BEFORE) {
@@ -71,8 +78,6 @@ function get_transformed_values(node, options: Options) {
 			language: match[1],
 		}
 	}
-
-	return null
 }
 
 function get_separator_regex(
