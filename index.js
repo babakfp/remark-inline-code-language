@@ -47,6 +47,7 @@ function within_inline_code_language(node, options) {
 	return node
 }
 
+// `_py print(Hello, World!)`
 function get_separator_position_before_regex(
 	separator_character = default_options.separator_character
 ) {
