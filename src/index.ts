@@ -25,55 +25,41 @@ export default function attacher(options: Options = default_options) {
 }
 
 function within_inline_code_language(node, options) {
+	let match
+
 	if (options.separator_position === SEPARATOR_POSITION.BEFORE) {
-		const match = node.value.match(
+		match = node.value.match(
 			get_separator_regex(
 				options.separator_position,
 				options.separator_character
 			)
 		)
-
-		if (match) {
-			const language = match[1]
-			const code = match[2]
-
-			node.value = code
-			node.lang = language
-		}
 	}
 
 	if (options.separator_position === SEPARATOR_POSITION.AFTER) {
-		const match = node.value.match(
+		match = node.value.match(
 			get_separator_regex(
 				options.separator_position,
 				options.separator_character
 			)
 		)
-
-		if (match) {
-			const language = match[1]
-			const code = match[2]
-
-			node.value = code
-			node.lang = language
-		}
 	}
 
 	if (options.separator_position === SEPARATOR_POSITION.BOTH) {
-		const match = node.value.match(
+		match = node.value.match(
 			get_separator_regex(
 				options.separator_position,
 				options.separator_character
 			)
 		)
+	}
 
-		if (match) {
-			const language = match[1]
-			const code = match[2]
+	if (match) {
+		const language = match[1]
+		const code = match[2]
 
-			node.value = code
-			node.lang = language
-		}
+		node.value = code
+		node.lang = language
 	}
 
 	return node
