@@ -27,7 +27,7 @@ export default function attacher(options: Options = default_options) {
 function within_inline_code_language(node, options) {
 	if (options.separator_position === SEPARATOR_POSITION.BEFORE) {
 		const match = node.value.match(
-			get_separator_position_before_regex(options.separator_character)
+			get_separator_before_regex(options.separator_character)
 		)
 
 		if (match) {
@@ -41,7 +41,7 @@ function within_inline_code_language(node, options) {
 
 	if (options.separator_position === SEPARATOR_POSITION.AFTER) {
 		const match = node.value.match(
-			get_separator_position_after_regex(options.separator_character)
+			get_separator_after_regex(options.separator_character)
 		)
 
 		if (match) {
@@ -55,7 +55,7 @@ function within_inline_code_language(node, options) {
 
 	if (options.separator_position === SEPARATOR_POSITION.BOTH) {
 		const match = node.value.match(
-			get_separator_position_both_regex(options.separator_character)
+			get_separator_both_regex(options.separator_character)
 		)
 
 		if (match) {
@@ -71,7 +71,7 @@ function within_inline_code_language(node, options) {
 }
 
 // `_py print(Hello, World!)`
-function get_separator_position_before_regex(
+function get_separator_before_regex(
 	separator_character = default_options.separator_character
 ) {
 	// Example: /^_([a-z]+)\s+(.+)$/i
@@ -81,7 +81,7 @@ function get_separator_position_before_regex(
 }
 
 // `py_ print(Hello, World!)`
-function get_separator_position_after_regex(
+function get_separator_after_regex(
 	separator_character = default_options.separator_character
 ) {
 	// Example: /^([a-z]+)_\s+(.+)$/i
@@ -91,7 +91,7 @@ function get_separator_position_after_regex(
 }
 
 // `_py_ print(Hello, World!)`
-function get_separator_position_both_regex(
+function get_separator_both_regex(
 	separator_character = default_options.separator_character
 ) {
 	// Example: /^_([a-z]+)_\s+(.+)$/i
