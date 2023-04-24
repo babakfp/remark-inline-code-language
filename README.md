@@ -43,7 +43,9 @@ console.log(JSON.stringify(result.children[0].children[0], null, 4))
 
 ### Options
 
-Make sure to add in all options.
+You can customize the syntax!
+
+If you are going to only change 1 option, sadly you need to add in all other options too.
 
 ```js
 .use(remarkInlineCodeLanguage, {
@@ -51,20 +53,24 @@ Make sure to add in all options.
 })
 ```
 
+#### `separator_character`
+
+This is the character(s) that separates the language name from the code content itself.
+
+- Type: `string`
+- Default: `"_"`
+
+##### Examples
+
+- `"_"` => `_js console.log()`
+- `"+"` => `+js console.log()`
+- `"="` => `=js console.log()`
+
 #### `separator_position`
 
 - Type: `"before" | "after" | "both"`
 - Default: `"before"`
 
-- `"before"`. Example: \``_js console.log()`\`
-- `"after"`. Example: \``js_ console.log()`\`
-- `"both"`. Example: \``_js_ console.log()`\`
-
-#### `separator_character`
-
-- Type: `string`
-- Default: `"_"`
-
-- `"_"`. Example: \``_js console.log()`\`. (`separator_position: "before"`)
-- `"."`. Example: \``js. console.log()`\`. (`separator_position: "after"`)
-- `"|"`. Example: \``|js| console.log()`\`. (`separator_position: "both"`)
+- `"before"` => `_js console.log()`
+- `"after"` => `js_ console.log()`
+- `"both"` => `_js_ console.log()`
