@@ -1,7 +1,7 @@
 {
 	"name": "remark-inline-code-language",
 	"description": "A Remark plugin that allows passing a language to inline code.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"license": "MIT",
 	"repository": "github:babakfp/remark-inline-code-language",
 	"main": "./dist/index.js",
