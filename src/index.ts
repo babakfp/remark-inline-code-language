@@ -32,11 +32,11 @@ export default function attacher(options: Options = default_options) {
 }
 
 function transform_node(node: Inline_Code, options: Options) {
-	const values = get_transformed_values(node, options)
+	const transformed_values = get_transformed_values(node, options)
 
-	if (values) {
-		node.value = values.code
-		node.lang = values.language
+	if (transformed_values) {
+		node.value = transformed_values.code
+		node.lang = transformed_values.language
 	}
 
 	return node
