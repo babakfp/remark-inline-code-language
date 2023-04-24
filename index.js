@@ -5,12 +5,12 @@ export default function attacher(separator) {
 
 	return function transformer(tree) {
 		visit(tree, "inlineCode", function visitor(node) {
-			withInlineCodeLanguage(node, separator)
+			within_inline_code_language(node, separator)
 		})
 	}
 }
 
-export function withInlineCodeLanguage(node, separator) {
+function within_inline_code_language(node, separator) {
 	const [language, code] = node.value.split(separator, 2)
 	if (language && code) {
 		node.value = code
