@@ -12,7 +12,5 @@ module.exports = {
 	htmlWhitespaceSensitivity: "css",
 	endOfLine: "auto",
 	pluginSearchDirs: ["."],
-	overrides: [
-		{ files: "*.md", options: { tabWidth: 2 } },
-	],
+	overrides: [{ files: "*.md", options: { tabWidth: 2 } }],
 }

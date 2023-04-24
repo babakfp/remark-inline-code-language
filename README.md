@@ -16,6 +16,7 @@ Note: This is not a standard markdown feature.
 npm i -D remark-inline-code-language
 ```
 
+<!-- prettier-ignore -->
 ```js
 import { unified } from "unified"
 import remarkParse from "remark-parse"
@@ -34,9 +35,9 @@ console.log(JSON.stringify(result.children[0].children[0], null, 4))
 
 ```json
 {
-    "type": "inlineCode",
-    "value": "console.log()",
-    "lang": "js"
+	"type": "inlineCode",
+	"value": "console.log()",
+	"lang": "js"
 }
 ```
 
