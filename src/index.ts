@@ -73,13 +73,13 @@ function get_separator_regex(
 
 	// `_py print(Hello, World!)`
 	if (separator_position === SEPARATOR_POSITION.BEFORE)
-		regex_string = `^${separator_character}([a-z]+)\\s+(.+)$` // /^_([a-z]+)\s+(.+)$/i
+		regex_string = `^\\${separator_character}([a-z]+)\\s+(.+)$` // /^_([a-z]+)\s+(.+)$/i
 	// `py_ print(Hello, World!)`
 	if (separator_position === SEPARATOR_POSITION.AFTER)
-		regex_string = `^([a-z]+)${separator_character}\\s+(.+)$` // /^([a-z]+)_\s+(.+)$/i
+		regex_string = `^([a-z]+)\\${separator_character}\\s+(.+)$` // /^([a-z]+)_\s+(.+)$/i
 	// `_py_ print(Hello, World!)`
 	if (separator_position === SEPARATOR_POSITION.BOTH)
-		regex_string = `^_([a-z]+)${separator_character}\\s+(.+)$` // /^_([a-z]+)_\s+(.+)$/i
+		regex_string = `^_([a-z]+)\\${separator_character}\\s+(.+)$` // /^_([a-z]+)_\s+(.+)$/i
 
 	const new_regex = new RegExp(regex_string, "i")
 	return new_regex
