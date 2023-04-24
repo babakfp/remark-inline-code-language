@@ -53,6 +53,20 @@ function within_inline_code_language(node, options) {
 		}
 	}
 
+	if (options.separator_position === SEPARATOR_POSITION.BOTH) {
+		const match = node.value.match(
+			get_separator_position_both_regex(options.separator_character)
+		)
+
+		if (match) {
+			const language = match[1]
+			const code = match[2]
+
+			node.value = code
+			node.lang = language
+		}
+	}
+
 	return node
 }
 
@@ -72,6 +86,16 @@ function get_separator_position_after_regex(
 ) {
 	// Example: /^([a-z]+)_\s+(.+)$/i
 	const new_regex_string = `^([a-z]+)${separator_character}\\s+(.+)$`
+	const new_regex = new RegExp(new_regex_string, "i")
+	return new_regex
+}
+
+// `_py_ print(Hello, World!)`
+function get_separator_position_both_regex(
+	separator_character = default_options.separator_character
+) {
+	// Example: /^_([a-z]+)_\s+(.+)$/i
+	const new_regex_string = `^_([a-z]+)${separator_character}\\s+(.+)$`
 	const new_regex = new RegExp(new_regex_string, "i")
 	return new_regex
 }
