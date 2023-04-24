@@ -1,14 +1,8 @@
 import { visit } from "unist-util-visit"
 
-const SEPARATOR_POSITION = {
-	BEFORE: "before",
-	AFTER: "after",
-	BOTH: "both",
-} as const
-
 interface Options {
 	separator_character: string
-	separator_position: (typeof SEPARATOR_POSITION)[keyof typeof SEPARATOR_POSITION]
+	separator_position: "before" | "after" | "both"
 }
 
 interface Inline_Code {
@@ -20,7 +14,7 @@ interface Inline_Code {
 
 const default_options: Options = {
 	separator_character: "_",
-	separator_position: SEPARATOR_POSITION.BEFORE,
+	separator_position: "before",
 }
 
 export default function attacher(options: Options = default_options) {
@@ -45,7 +39,7 @@ function transform_node(node: Inline_Code, options: Options) {
 function get_transformed_values(node: Inline_Code, options: Options) {
 	let match
 
-	if (options.separator_position === SEPARATOR_POSITION.BEFORE) {
+	if (options.separator_position === "before") {
 		match = node.value.match(
 			get_separator_regex(
 				options.separator_character,
@@ -54,7 +48,7 @@ function get_transformed_values(node: Inline_Code, options: Options) {
 		)
 	}
 
-	if (options.separator_position === SEPARATOR_POSITION.AFTER) {
+	if (options.separator_position === "after") {
 		match = node.value.match(
 			get_separator_regex(
 				options.separator_character,
@@ -63,7 +57,7 @@ function get_transformed_values(node: Inline_Code, options: Options) {
 		)
 	}
 
-	if (options.separator_position === SEPARATOR_POSITION.BOTH) {
+	if (options.separator_position === "both") {
 		match = node.value.match(
 			get_separator_regex(
 				options.separator_character,
@@ -87,13 +81,13 @@ function get_separator_regex(
 	let regex_string = ""
 
 	// `_py print(Hello, World!)`
-	if (separator_position === SEPARATOR_POSITION.BEFORE)
+	if (separator_position === "before")
 		regex_string = `^\\${separator_character}([a-z]+)\\s+(.+)$` // /^_([a-z]+)\s+(.+)$/i
 	// `py_ print(Hello, World!)`
-	if (separator_position === SEPARATOR_POSITION.AFTER)
+	if (separator_position === "after")
 		regex_string = `^([a-z]+)\\${separator_character}\\s+(.+)$` // /^([a-z]+)_\s+(.+)$/i
 	// `_py_ print(Hello, World!)`
-	if (separator_position === SEPARATOR_POSITION.BOTH)
+	if (separator_position === "both")
 		regex_string = `^\\${separator_character}([a-z]+)\\${separator_character}\\s+(.+)$` // /^_([a-z]+)_\s+(.+)$/i
 
 	return new RegExp(regex_string, "i")
