@@ -1,6 +1,6 @@
 # remark-inline-code-language
 
-[Remark](https://github.com/remarkjs/remark) plugin that allows passing a language to inline code. This is useful for syntax highlighting.
+A [Remark](https://github.com/remarkjs/remark) plugin that allows passing a language to inline code. This is useful for syntax highlighting.
 
 Note: This is not a standard markdown feature.
 
