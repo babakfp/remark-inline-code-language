@@ -8,7 +8,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "tsc -w",
-		"build": "tsc"
+		"build": "tsc",
+		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"keywords": [
 		"remark",
