@@ -91,6 +91,5 @@ function get_separator_regex(
 	if (separator_position === SEPARATOR_POSITION.BOTH)
 		regex_string = `^\\${separator_character}([a-z]+)\\${separator_character}\\s+(.+)$` // /^_([a-z]+)_\s+(.+)$/i
 
-	const new_regex = new RegExp(regex_string, "i")
-	return new_regex
+	return new RegExp(regex_string, "i")
 }
