@@ -46,7 +46,7 @@ function within_inline_code_language(node, options) {
 function get_separator_position_before_regex(
 	separator_character = default_options.separator_character
 ) {
-	// Example: /^_[a-z]+\s+.+$/i
+	// Example: /^_([a-z]+)\s+(.+)$/i
 	const new_regex_string = `^${separator_character}([a-z]+)\\s+(.+)$`
 	const new_regex = new RegExp(new_regex_string, "i")
 	return new_regex
