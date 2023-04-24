@@ -1,44 +1,69 @@
 # remark-inline-code-language
 
-[Remark](https://remark.js.org/) plugin that allows passing a language to inline code. This is useful for syntax highlighting. Note: This is non-standard.
+[Remark](https://github.com/remarkjs/remark) plugin that allows passing a language to inline code. This is useful for syntax highlighting.
 
-## Usage
-
-```markdown
-This is `js^const inline = 'code';`.
-```
-
-```js
-const separator = "^"
-processor.use(require("remark-inline-code-language"), separator)
-```
+Note: This is not a standard markdown feature.
 
 ## Example
 
+```
+`_js console.log()`
+```
+
+## Installation
+
+```
+npm i -D remark-inline-code-language
+```
+
 ```js
-const unified = require("unified")
-const markdown = require("remark-parse")
-const inlineCodeLanguage = require("remark-inline-code-language")
+import { unified } from "unified"
+import remarkParse from "remark-parse"
+import remarkInlineCodeLanguage from "remark-inline-code-language"
 
-const mdast = unified()
-	.use(markdown, { position: false })
-	.parse('This is `js^const inline = "code";`.')
+const mdast = await unified()
+	.use(remarkParse)
+	.parse("`_js console.log()`")
 
-const transformedAst = unified()
-	.use(inlineCodeLanguage, "^")
+const result = unified()
+	.use(remarkInlineCodeLanguage)
 	.runSync(mdast)
 
-console.log(transformedAst.children[0].children);
+console.log(JSON.stringify(result.children[0].children[0], null, 4))
 ```
 
-```
-[
-	{ type: "text", value: "This is " },
-	{ type: "inlineCode", value: 'const inline = "code";', lang: "js" },
-	{ type: "text", value: "." },
-]
+```json
+{
+    "type": "inlineCode",
+    "value": "console.log()",
+    "lang": "js"
+}
 ```
 
-## Tip
+### Options
 
-Instead of using this as a plugin, it is also possible to just import the `withInlineCodeLanguage` function. This can e.g. be useful when transforming Markdown to HTML: to save one tree traversal, use `withInlineCodeLanguage` in a `remark-rehype` `handler` function.
+Make sure to add in all options.
+
+```js
+.use(remarkInlineCodeLanguage, {
+	// ...
+})
+```
+
+#### `separator_position`
+
+- Type: `"before" | "after" | "both"`
+- Default: `"before"`
+
+- `"before"`. Example: \``_js console.log()`\`
+- `"after"`. Example: \``js_ console.log()`\`
+- `"both"`. Example: \``_js_ console.log()`\`
+
+#### `separator_character`
+
+- Type: `string`
+- Default: `"_"`
+
+- `"_"`. Example: \``_js console.log()`\`. (`separator_position: "before"`)
+- `"."`. Example: \``js. console.log()`\`. (`separator_position: "after"`)
+- `"|"`. Example: \``|js| console.log()`\`. (`separator_position: "both"`)
