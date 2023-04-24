@@ -19,12 +19,23 @@ const default_options: Options = {
 export default function attacher(options: Options = default_options) {
 	return function transformer(tree) {
 		visit(tree, "inlineCode", function visitor(node) {
-			within_inline_code_language(node, options)
+			transform_node(node, options)
 		})
 	}
 }
 
-function within_inline_code_language(node, options) {
+function transform_node(node, options: Options) {
+	const values = get_transformed_values(node, options)
+
+	if (values) {
+		node.value = values.code
+		node.lang = values.language
+	}
+
+	return node
+}
+
+function get_transformed_values(node, options: Options) {
 	let match
 
 	if (options.separator_position === SEPARATOR_POSITION.BEFORE) {
@@ -55,14 +66,13 @@ function within_inline_code_language(node, options) {
 	}
 
 	if (match) {
-		const language = match[1]
-		const code = match[2]
-
-		node.value = code
-		node.lang = language
+		return {
+			code: match[2],
+			language: match[1],
+		}
 	}
 
-	return node
+	return null
 }
 
 function get_separator_regex(
