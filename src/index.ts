@@ -7,8 +7,8 @@ const SEPARATOR_POSITION = {
 } as const
 
 interface Options {
-	separator_position: (typeof SEPARATOR_POSITION)[keyof typeof SEPARATOR_POSITION]
 	separator_character: string
+	separator_position: (typeof SEPARATOR_POSITION)[keyof typeof SEPARATOR_POSITION]
 }
 
 interface Inline_Code {
@@ -19,8 +19,8 @@ interface Inline_Code {
 }
 
 const default_options: Options = {
-	separator_position: SEPARATOR_POSITION.BEFORE,
 	separator_character: "_",
+	separator_position: SEPARATOR_POSITION.BEFORE,
 }
 
 export default function attacher(options: Options = default_options) {
@@ -48,8 +48,8 @@ function get_transformed_values(node: Inline_Code, options: Options) {
 	if (options.separator_position === SEPARATOR_POSITION.BEFORE) {
 		match = node.value.match(
 			get_separator_regex(
-				options.separator_position,
-				options.separator_character
+				options.separator_character,
+				options.separator_position
 			)
 		)
 	}
@@ -57,8 +57,8 @@ function get_transformed_values(node: Inline_Code, options: Options) {
 	if (options.separator_position === SEPARATOR_POSITION.AFTER) {
 		match = node.value.match(
 			get_separator_regex(
-				options.separator_position,
-				options.separator_character
+				options.separator_character,
+				options.separator_position
 			)
 		)
 	}
@@ -66,8 +66,8 @@ function get_transformed_values(node: Inline_Code, options: Options) {
 	if (options.separator_position === SEPARATOR_POSITION.BOTH) {
 		match = node.value.match(
 			get_separator_regex(
-				options.separator_position,
-				options.separator_character
+				options.separator_character,
+				options.separator_position
 			)
 		)
 	}
@@ -81,8 +81,8 @@ function get_transformed_values(node: Inline_Code, options: Options) {
 }
 
 function get_separator_regex(
-	separator_position = default_options.separator_position,
-	separator_character = default_options.separator_character
+	separator_character = default_options.separator_character,
+	separator_position = default_options.separator_position
 ) {
 	let regex_string = ""
 
